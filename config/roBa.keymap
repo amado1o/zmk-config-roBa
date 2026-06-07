@@ -81,6 +81,13 @@
             bindings = <&kp RIGHT_BRACKET &kp NON_US_HASH &kp LEFT>;
             label = "WRAP_BRACKET";
         };
+
+        kp_underscore: kp_underscore {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp UNDER>;
+            label = "KP_UNDERSCORE";
+        };
     };
 
     keymap {
@@ -137,9 +144,9 @@
 
         SCROLL {
             bindings = <
-&kp SINGLE_QUOTE      &kp LS(QMARK)     &kp LS(EXCL)  &trans    &trans                         &kp PG_UP  &kp BSPC  &kp ESC  &kp DEL    &kp LS(NON_US_BSLH)
+&kp SINGLE_QUOTE      &kp LS(QMARK)     &kp LS(EXCL)  &trans    &trans                         &kp PG_UP  &kp BSPC  &kp ESC  &kp DEL    &kp LS(INTERNATIONAL_3)
 &kp LALT              &kp LCTRL         &kp LSHFT     &trans    &trans   &trans       &trans   &kp LEFT   &kp DOWN  &kp UP   &kp RIGHT  &kp LS(EQUAL)
-&kp LS(LEFT_BRACKET)  &kp LS(NUMBER_2)  &kp LS(N7)    &trans    &trans   &trans       &trans   &kp PG_DN  &kp HOME  &kp F2   &kp END    &kp LS(INT3)
+&kp LS(LEFT_BRACKET)  &kp LS(NUMBER_2)  &kp LS(N7)    &trans    &trans   &trans       &trans   &kp PG_DN  &kp HOME  &kp F2   &kp END    &kp LS(INTERNATIONAL_1)
 &none                 &none             &none         &kp HOME  &kp TAB  &kp END      &kp ESC  &trans                                   &kp NON_US_BSLH
             >;
         };

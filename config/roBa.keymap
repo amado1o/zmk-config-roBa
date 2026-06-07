@@ -39,29 +39,47 @@
             key-positions = <19 20>;
         };
 
-        muhennkann {
+        cmb_mclk {
             bindings = <&mkp MCLK>;
             key-positions = <18 20>;
+        };
+
+        wrap_parent {
+            bindings = <&wrap_parent>;
+            key-positions = <14 17>;
+        };
+
+        wrap_brace {
+            bindings = <&wrap_brace>;
+            key-positions = <26 29>;
+        };
+
+        wrap_bracket {
+            bindings = <&wrap_bracket>;
+            key-positions = <4 5>;
         };
     };
 
     macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
+        wrap_parent: wrap_parent {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(N8) &kp LS(N9) &kp LEFT>;
+            label = "WRAP_PARENT";
         };
-    };
 
-    behaviors {
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
+        wrap_brace: wrap_brace {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LS(RIGHT_BRACKET) &kp LS(NON_US_HASH) &kp LEFT>;
+            label = "WRAP_BRACE";
+        };
 
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
+        wrap_bracket: wrap_bracket {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RIGHT_BRACKET &kp NON_US_HASH &kp LEFT>;
+            label = "WRAP_BRACKET";
         };
     };
 
@@ -70,10 +88,10 @@
 
         default_layer {
             bindings = <
-&kp SEMI   &kp COMMA     &kp DOT       &kp P                 &kp Q                                                               &kp Y        &kp G  &kp D  &kp M  &kp F
-&kp A      &kp O         &kp E         &lt 5 I               &kp U                 &lt 6 LEFT                   &kp RIGHT        &kp B        &kp N  &kp T  &kp R  &kp S
-&kp Z      &kp X         &kp C         &kp V                 &kp W                 &kp RIGHT_BRACKET            &kp NON_US_HASH  &kp H        &kp J  &kp K  &kp L  &kp MINUS
-&kp LCTRL  &kp LEFT_WIN  &kp LEFT_ALT  &mt LCTRL LANGUAGE_2  &mt LEFT_SHIFT SPACE  &mt LEFT_ALT LANGUAGE_1      &kp BACKSPACE    &lt 2 ENTER                       &kp SLASH
+&kp SEMI   &kp COMMA     &kp DOT       &kp P                 &kp Q                                                                    &kp Y        &kp G  &kp D  &kp M  &kp F
+&kp A      &kp O         &kp E         &lt 5 I               &kp U                 &lt 6 UP_ARROW               &kp LEFT_BRACKET      &kp B        &kp N  &kp T  &kp R  &kp S
+&kp Z      &kp X         &kp C         &kp V                 &kp W                 &kp DOWN_ARROW               &kp LS(SINGLE_QUOTE)  &kp H        &kp J  &kp K  &kp L  &kp MINUS
+&kp LCTRL  &kp LEFT_WIN  &kp LEFT_ALT  &mt LCTRL LANGUAGE_2  &mt LEFT_SHIFT SPACE  &mt LEFT_ALT LANGUAGE_1      &lt 1 BACKSPACE       &lt 2 ENTER                       &lt 5 SLASH
             >;
 
             sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
@@ -81,19 +99,19 @@
 
         FUNCTION {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                          &kp F12
+&trans  &trans  &trans  &kp KP_LEFT_PARENTHESIS   &trans                              &kp KP_SUBTRACT  &kp N7  &kp N8  &kp N9  &kp KP_PLUS
+&trans  &trans  &trans  &kp KP_RIGHT_PARENTHESIS  &trans  &trans      &kp KP_NUMLOCK  &kp KP_DIVIDE    &kp N4  &kp N5  &kp N6  &kp KP_ASTERISK
+&trans  &trans  &trans  &trans                    &trans  &trans      &trans          &kp N0           &kp N1  &kp N2  &kp N3  &kp KP_EQUAL
+&trans  &trans  &trans  &trans                    &trans  &trans      &trans          &trans                                   &none
             >;
         };
 
         NUM {
             bindings = <
-&kp LS(EXCL)  &kp AT   &kp LS(POUND)  &kp LS(DLLR)  &kp LS(PRCNT)                                               &kp CARET  &kp LS(AMPS)  &kp LS(STAR)  &kp LS(LPAR)  &kp LS(RPAR)
-&kp N1        &kp N2   &kp N3         &kp N4        &kp N5         &kp LC(LA(KP_NUMBER_0))      &kp UNDERSCORE  &kp N6     &kp N7        &kp N8        &kp N9        &kp N0
-&kp F1        &kp F2   &kp F3         &kp F4        &kp F5         &kp EQUAL                    &trans          &kp F6     &kp F7        &kp F8        &kp F9        &kp F10
-&kp F11       &kp F12  &trans         &kp LCTRL     &kp LSHFT      &kp LALT                     &kp BSPC        &kp ENTER                                            &kp PIPE
+&kp LS(EXCL)  &kp LEFT_BRACKET  &kp LS(POUND)  &kp LS(DLLR)  &kp LS(PRCNT)                          &kp EQUAL  &kp LS(NUMBER_6)  &kp LS(SINGLE_QUOTE)  &kp LS(N8)  &kp LS(N9)
+&kp N1        &kp N2            &kp N3         &kp N4        &kp N5         &none         &none     &kp N6     &kp N7            &kp N8                &kp N9      &kp N0
+&kp F1        &kp F2            &kp F3         &kp F4        &kp F5         &none         &trans    &kp F6     &kp F7            &kp F8                &kp F9      &kp F10
+&kp F11       &kp F12           &trans         &kp LCTRL     &kp LSHFT      &kp LALT      &kp BSPC  &kp ENTER                                                      &none
             >;
         };
 
@@ -119,10 +137,10 @@
 
         SCROLL {
             bindings = <
-&kp COLON             &kp LS(QMARK)     &kp LS(EXCL)   &trans    &trans                         &kp PG_UP  &kp BSPC  &kp ESC  &kp DEL    &kp LS(PIPE)
-&kp LALT              &kp LCTRL         &kp LSHFT      &trans    &trans   &trans       &trans   &kp LEFT   &kp DOWN  &kp UP   &kp RIGHT  &kp LS(TILDE)
-&trans                &kp SLASH         &kp BACKSLASH  &trans    &trans   &trans       &trans   &kp PG_DN  &kp HOME  &kp F2   &kp END    &kp LS(UNDER)
-&kp LS(LEFT_BRACKET)  &kp LS(NUMBER_2)  &kp LS(N7)     &kp HOME  &kp TAB  &kp END      &kp ESC  &trans                                   &trans
+&kp SINGLE_QUOTE      &kp LS(QMARK)     &kp LS(EXCL)  &trans    &trans                         &kp PG_UP  &kp BSPC  &kp ESC  &kp DEL    &kp LS(NON_US_BSLH)
+&kp LALT              &kp LCTRL         &kp LSHFT     &trans    &trans   &trans       &trans   &kp LEFT   &kp DOWN  &kp UP   &kp RIGHT  &kp LS(EQUAL)
+&kp LS(LEFT_BRACKET)  &kp LS(NUMBER_2)  &kp LS(N7)    &trans    &trans   &trans       &trans   &kp PG_DN  &kp HOME  &kp F2   &kp END    &kp LS(INT3)
+&none                 &none             &none         &kp HOME  &kp TAB  &kp END      &kp ESC  &trans                                   &kp NON_US_BSLH
             >;
         };
 
